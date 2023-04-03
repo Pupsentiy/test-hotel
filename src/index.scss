@@ -1,0 +1,56 @@
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul[class],
+ol,
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd,
+a {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-decoration: none;
+}
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+a {
+  -webkit-transition: all 0.25s ease;
+  -o-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+}
+
+button{
+  cursor: pointer;
+}
