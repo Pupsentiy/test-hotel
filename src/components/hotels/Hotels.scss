@@ -1,26 +1,131 @@
-.hotels-heading {
-  margin-top: 16px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  .hotels-title-wrapper {
+.hotels {
+  padding-bottom: 10px;
+  .hotels-heading {
+    margin-top: 16px;
     display: flex;
+    flex-direction: row;
     align-items: center;
-    .hotels-heading-title {
-      font-weight: 500;
-      font-size: 32px;
-      line-height: 38px;
+    justify-content: space-between;
+    .hotels-title-wrapper {
+      display: flex;
+      align-items: center;
+      .hotels-heading-title {
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 38px;
+      }
+      .hotels-title__img {
+        margin: 0 20px;
+      }
     }
-    .hotels-title__img {
-      margin: 0 20px;
+    .hotels-heading-date {
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 28px;
+      color: #41522e;
+      margin-left: 10px;
     }
   }
-  .hotels-heading-date {
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 28px;
-    color: #41522e;
-    margin-left: 10px;
+  .hotels__counter-chosen {
+    margin: 12px 0;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 22px;
+    letter-spacing: -0.408px;
+    color: #424242;
+    .hotels__counter-chosen-count {
+      font-weight: 500;
+      font-size: 17px;
+      line-height: 22px;
+      letter-spacing: -0.408px;
+      color: #41522e;
+    }
+  }
+
+  .hotels-list__content {
+    height: 510px;
+    overflow: auto;
+    .hotels-catalog {
+      display: flex;
+      flex-direction: column;
+      .wrapper-catalog {
+        display: flex;
+        flex-direction: column;
+        .item-border{
+          width: 97.5%;
+          height: 1px;
+          background: rgba(135, 135, 135, 0.2);
+          border-radius: 8px;
+          transform: matrix(1, 0, 0, -1, 0, 0);
+        }
+
+        .catalog__item {
+          padding: 16px 16px 16px 0;
+          display: flex;
+          width: 100%;
+          .item-img {
+            width: 64px;
+            height: 64px;
+            background: rgba(65, 82, 46, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 24px;
+          }
+          .item-info {
+            .item-name {
+              font-weight: 300;
+              font-size: 17px;
+              line-height: 22px;
+              letter-spacing: -0.408px;
+              color: #424242;
+              max-width: 350px;
+            }
+
+            .item-date {
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 22px;
+              letter-spacing: -0.408px;
+              color: #878787;
+              margin-bottom: 7px;
+            }
+
+            .item-rating {
+            }
+          }
+          .item-price {
+            margin-left: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            .btn-add-chosen {
+              background: none;
+              border: none;
+            }
+
+            .price {
+              margin-top: auto;
+              font-weight: 300;
+              font-size: 11px;
+              line-height: 22px;
+              letter-spacing: -0.408px;
+              color: #878787;
+
+              span {
+                font-weight: 400;
+                font-size: 17px;
+                line-height: 22px;
+                text-align: right;
+                letter-spacing: -0.408px;
+                color: #424242;
+                margin-left: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

@@ -42,7 +42,20 @@ body {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
-  background: #E5E5E5;
+  background: #e5e5e5;
+  ::-webkit-scrollbar {
+    background: none;
+    width: 2px;
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #41522e;
+    height: 100px;
+}
+}
+main{
+  height: 100vh;
 }
 
 a {

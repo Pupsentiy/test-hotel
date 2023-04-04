@@ -52,7 +52,7 @@ const hotel = useAppSelector(state => state.hotelReducer)
     <div className="signin">
       <div className="signin-filter">
         <ModalWindow>
-          <h1 className="signin-title" onClick={() => dispath(fetchHotels())}>Simple Hotel Check</h1>
+          <h1 className="signin-title" >Simple Hotel Check</h1>
           <form onSubmit={handleSubmit(submit)}>
             <Input
               htmlFor="Логин"

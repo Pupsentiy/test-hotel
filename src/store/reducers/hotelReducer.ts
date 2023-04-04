@@ -18,5 +18,5 @@ export default function hotelReducer (state = initialState, action: any){
 };
 
 export const setHotel = (payload: any) => ({ type: SET_HOTELS, payload });
-export const fetchHotels = () => ({ type: FETCH_HOTELS });
+export const fetchHotels = (now:any) => ({ type: FETCH_HOTELS,now});
 
