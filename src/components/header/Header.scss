@@ -1,0 +1,22 @@
+.header {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .header_btn-logout {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    border:none;
+    background: none;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    img{
+      margin-left: 15px;
+    }
+  }
+}

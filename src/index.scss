@@ -1,7 +1,6 @@
 * {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  
 }
 
 h1,
@@ -43,6 +42,7 @@ body {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
+  background: #E5E5E5;
 }
 
 a {
@@ -51,6 +51,14 @@ a {
   transition: all 0.25s ease;
 }
 
-button{
+button {
   cursor: pointer;
+}
+
+h1 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  color: #424242;
 }

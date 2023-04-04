@@ -1,0 +1,19 @@
+.home-container {
+  max-width: 1048px;
+  margin: 0 auto;
+  display: flex;
+  .home-left-block {
+    display: flex;
+    flex-direction: column;
+    margin-right: 24px;
+  }
+  .home-right-block {
+    width: 664px;
+    height: 902px;
+    padding: 32px;
+    background: #ffffff;
+    box-shadow: 0px 4px 33px rgba(0, 0, 0, 0.04);
+    border-radius: 16px;
+    
+  }
+}

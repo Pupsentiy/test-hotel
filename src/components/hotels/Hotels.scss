@@ -1,0 +1,26 @@
+.hotels-heading {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  .hotels-title-wrapper {
+    display: flex;
+    align-items: center;
+    .hotels-heading-title {
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 38px;
+    }
+    .hotels-title__img {
+      margin: 0 20px;
+    }
+  }
+  .hotels-heading-date {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    color: #41522e;
+    margin-left: 10px;
+  }
+}
