@@ -4,13 +4,12 @@ import { EMAIL_REGEXP, PASSWORD_REGEXP } from "../constants/constants";
 
 export const emeilSchema = yup
   .string()
-  .email()
+  .email("Некорректный адрес электронной почты")
   .matches(EMAIL_REGEXP, "Введите адрес электронной почты")
-  .required("Please Enter Your Email!");
+  .required("Пожалуйста, введите электронной почты!");
 
   export const passwordShema = yup
   .string()
-  // .typeError("must be a string")
   .matches(PASSWORD_REGEXP, "Должна быть хотя бы одна буква и одна цифра")
   .min(8)
   .max(64)

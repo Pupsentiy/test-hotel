@@ -7,8 +7,8 @@ export interface IInputProps {
   htmlFor: string;
   error?: string | undefined;
   type: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  value: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
   register?: {
     onChange: ChangeHandler;
     onBlur: ChangeHandler;

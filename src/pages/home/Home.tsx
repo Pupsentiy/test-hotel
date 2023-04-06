@@ -1,32 +1,36 @@
 import { useEffect } from "react";
-import Chosen from "../../components/chosen/Chosen";
 import Hotels from "../../components/hotels/Hotels";
 import Search from "../../components/search/Search";
 
 import "./Home.scss";
-import { useAppDispatch } from "../../hooks/hooks";
-import { fetchHotels } from "../../store/reducers/hotelReducer";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { fetchHotelsRequestAction } from "../../store/reducers/hotels/hotelReducer";
+import Favorite from "../../components/favorite/Favorite";
+import Header from "../../components/header/Header";
 
 const Home = () => {
   const dispath = useAppDispatch();
-  const now = new Date()
-  .toLocaleString("ru")
-  .slice(0, 10).replace(/[\.\/]/g,'-');
-  console.log(now)
+  const { currentDate, location, amountOfDays } = useAppSelector(
+    (state) => state.hotelReducer
+  );
+
   useEffect(() => {
-    dispath(fetchHotels(now));
-  }, []);
+    dispath(fetchHotelsRequestAction(currentDate, location, amountOfDays));
+  }, [amountOfDays, currentDate, dispath, location]);
 
   return (
-    <div className="home-container">
-      <div className="home-left-block">
-        <Search />
-        <Chosen />
+    <>
+      <Header />
+      <div className="home-container">
+        <div className="home-left-block">
+          <Search />
+          <Favorite />
+        </div>
+        <div className="home-right-block">
+          <Hotels />
+        </div>
       </div>
-      <div className="home-right-block">
-        <Hotels />
-      </div>
-    </div>
+    </>
   );
 };
 

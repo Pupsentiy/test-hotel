@@ -5,15 +5,14 @@ import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
 import ModalWindow from "../../components/modalWindow/ModalWindow";
 
-import { fetchHotels } from "../../store/reducers/hotelReducer";
-
-import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { useAppDispatch } from "../../hooks/hooks";
 
 import { signIn } from "../../core/helpers/validation.helpers";
 
 import "./SignIn.scss";
-
-// import { fetchHotelData } from "../api";
+import { loginAction } from "../../store/reducers/auth/signInReducer";
+import { useNavigate } from "react-router-dom";
+import { routesConfig } from "../../routes/routesConfig";
 
 export interface ISignInForm {
   email: string;
@@ -21,8 +20,8 @@ export interface ISignInForm {
 }
 
 const SignIn = () => {
-const dispath = useAppDispatch()
-const hotel = useAppSelector(state => state.hotelReducer)
+  const dispath = useAppDispatch();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -31,47 +30,29 @@ const hotel = useAppSelector(state => state.hotelReducer)
   } = useForm<ISignInForm>({ resolver: yupResolver(signIn), mode: "onSubmit" });
 
   const submit: SubmitHandler<ISignInForm> = (data) => {
-    console.log({ data });
+    dispath(loginAction(data.email));
     reset();
-  } 
-  //5dbd9e7fd87a39c193b06b33565d9126
-  // const fetchHotelsFromApi = async () => {
-  //   // const req = await fetch('http://engine.hotellook.com/api/v2/lookup.json?token=5dbd9e7fd87a39c193b06b33565d9126&query=moscow&lang=ru&lookFor=hotel&limit=10')
-  //   const req = await fetch('http://engine.hotellook.com/api/v2/cache.json?location=Moscow&currency=rub&checkIn=2023-04-04&checkOut=2023-04-12&limit=10')
-  //   const data = await req.json()
-  //   return setDa(data)
-  // }
-  
-  // useEffect(() => {
-  
-  //   fetchHotelsFromApi()
-  // }, [])
-  
-
+    navigate(routesConfig.home.path);
+  };
   return (
     <div className="signin">
       <div className="signin-filter">
         <ModalWindow>
-          <h1 className="signin-title" >Simple Hotel Check</h1>
+          <h1 className="signin-title">Simple Hotel Check</h1>
           <form onSubmit={handleSubmit(submit)}>
             <Input
               htmlFor="Логин"
               type="Email"
               error={errors.email?.message}
-              onChange={() => {}}
-              value=""
               register={{ ...register("email") }}
               placeholder="Введите почту"
               classInput="signIn__input-auth"
               classLabel="signIn__input-label"
-              
             />
             <Input
               htmlFor="Пароль"
               type="password"
               error={errors.password?.message}
-              onChange={() => {}}
-              value=""
               register={{ ...register("password") }}
               placeholder="Введите пароль"
               classInput="signIn__input-auth"
@@ -87,9 +68,4 @@ const hotel = useAppSelector(state => state.hotelReducer)
   );
 };
 
-export default SignIn
-
-
-
-
-
+export default SignIn;
