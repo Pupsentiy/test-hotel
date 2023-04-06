@@ -1,14 +1,11 @@
-export const currentDate = new Date()
+export const currentDate: string = new Date()
   .toLocaleString("ru")
   .slice(0, 10)
   .split(".")
   .reverse()
   .join("-");
 
-export const getSumDays = (
-  currentDate: string | number | Date,
-  amountOfDays: any
-) => {
+export const getSumDays = (currentDate: Date, amountOfDays: number):string => {
   return new Date(
     new Date(currentDate).setDate(
       new Date(currentDate).getDate() + Number(amountOfDays)

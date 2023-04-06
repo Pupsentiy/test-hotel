@@ -14,7 +14,7 @@
   }
 
   .favorite-header {
-    margin-bottom: 32px;
+    margin-bottom: 16px;
     .favorite-select {
       padding: 4px 8px;
       background: #ffffff;
@@ -27,4 +27,8 @@
       margin-right: 8px;
     }
   }
+.favorite-hidden{
+  max-height: 290px;
+  overflow: auto;
+}
 }

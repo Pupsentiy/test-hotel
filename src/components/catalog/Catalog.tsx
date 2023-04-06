@@ -36,55 +36,58 @@ const Catalog: FC<TCatalog> = ({ houseImg, data }) => {
     if (bool) {
       dispatch(setDeleteFavoriteAction(item));
     } else {
-      dispatch(setAddFavoriteAction(item));
+      dispatch(setAddFavoriteAction(item, amountOfDays));
     }
   };
 
-  console.log(houseImg);
   return (
     <div className="catalog">
       {data &&
         data.map((item: any, i: any) => (
           <div className="wrapper-catalog" key={i}>
-            <div className="catalog__item">
+            <div className={"catalog__item"}>
               {houseImg !== undefined ? (
                 <div className="item-img">
                   <img src={houseImg} alt="house" />
                 </div>
               ) : null}
               <div className="item-info">
-                <h3 className="item-name">{item.hotelName}</h3>
-                <h4 className="item-date">
-                  {changeFormatDate(currentDate)} <span>-</span> {amountOfDays}
-                  {amountOfDays > 1 && amountOfDays < 5
-                    ? " дня"
-                    : amountOfDays > 4
-                    ? " дней"
-                    : " день"}
-                </h4>
-                <div className="item-rating">
-                  {stars.map((_el, i) => (
-                    <div key={i + 1}>
-                      <StarSvg color={i < item.stars ? "#CDBC1E" : "#6C6845"} />
-                    </div>
-                  ))}
+                <div className="info-header">
+                  <h3 className="item-name">{item.hotelName}</h3>
+                  <Button
+                    type="button"
+                    classButton="btn-add-favorite"
+                    onClick={() => handleFavoriteHotel(item)}
+                  >
+                    <img
+                      src={getBoolean(item) ? like : likeTransparent}
+                      alt="like Transparent"
+                    />
+                  </Button>
                 </div>
-              </div>
 
-              <div className="item-price">
-                <Button
-                  type="button"
-                  classButton="btn-add-favorite"
-                  onClick={() => handleFavoriteHotel(item)}
-                >
-                  <img
-                    src={getBoolean(item) ? like : likeTransparent}
-                    alt="like Transparent"
-                  />
-                </Button>
-                <p className="price">
-                  Price: <span>{item.priceFrom} ₽</span>
-                </p>
+                <div className="info-middle">
+                  <h4 className="item-date">
+                    {changeFormatDate(currentDate)} <span>-</span>{" "}
+                    {item.days !== undefined ? item.days : amountOfDays}
+                    {" день"}
+                  </h4>
+                </div>
+                <div className="info-footer">
+                  <div className="item-rating">
+                    {stars.map((_el, i) => (
+                      <div key={i + 1}>
+                        <StarSvg
+                          color={i < item.stars ? "#CDBC1E" : "#6C6845"}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="item-price">
+                    <p className="price">Price:</p>
+                    <span>{item.priceFrom.toFixed(0)} ₽</span>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="item-border"></div>
