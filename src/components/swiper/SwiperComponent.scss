@@ -24,32 +24,31 @@
       flex-shrink: 0;
       overflow: hidden;
       margin-right: 12px;
-      width: auto!important;
-      .slide-wrapper__img{
+      width: auto !important;
+      .slide-wrapper__img {
         width: auto;
         max-width: 164px;
         overflow: hidden;
         margin-right: 12px;
         .img {
-         max-width: 100%;
-         max-height: 140px;
-         object-fit: none;
-         border-radius: 10px;
+          max-width: 100%;
+          max-height: 140px;
+          object-fit: none;
+          border-radius: 10px;
         }
       }
 
-      .slide-wrapper__last-img{
+      .slide-wrapper__last-img {
         width: auto;
         max-width: 164px;
         overflow: hidden;
-        .last-img{
+        .last-img {
           max-width: 100%;
           max-height: 140px;
           object-fit: none;
           border-radius: 10px 0 0 10px;
         }
       }
-     
     }
   }
 }

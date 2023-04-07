@@ -48,14 +48,18 @@ const Favorite: FC = () => {
         <Select
           name="rating"
           id="rating"
-          onChange={(event: ChangeEvent<HTMLSelectElement>) => changePickRating(event)}
+          onChange={(event: ChangeEvent<HTMLSelectElement>) =>
+            changePickRating(event)
+          }
           className="favorite-select"
           data={dataRating}
         />
         <Select
           name="price"
           id="price"
-          onChange={(event: ChangeEvent<HTMLSelectElement>) => changePickPrice(event)}
+          onChange={(event: ChangeEvent<HTMLSelectElement>) =>
+            changePickPrice(event)
+          }
           className="favorite-select"
           data={dataPrice}
         />

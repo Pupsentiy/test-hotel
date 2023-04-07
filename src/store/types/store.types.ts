@@ -1,6 +1,6 @@
 import { AxiosRequestHeaders, AxiosRequestConfig } from "axios";
 import { TArrImg } from "../../core/constants/constants.types";
-import { ADD_FAVORITE_HOTELS, DELETE_FAVORITE_HOTELS, LOAD_HOTELS_FAILURE, LOAD_HOTELS_REQUEST, LOAD_HOTELS_SUCCESS, LOGIN, SORT_PRICE_ASC, SORT_PRICE_DESC, SORT_RATING_ASC, SORT_RATING_DESC } from "../sagas";
+
 export interface THotels {
   pricePercentile: PricePercentile;
   locationId: number;
@@ -11,7 +11,7 @@ export interface THotels {
   priceFrom: number;
   hotelId: number;
   days?: number;
-  currentDate?:string
+  currentDate?: string;
 }
 
 export interface PricePercentile {
@@ -98,12 +98,12 @@ export interface TFetchHotelsSuccessAction {
 
 export interface TFetchHotelsFailureAction {
   type: "LOAD_HOTELS_FAILURE";
-  payload: string 
+  payload: string;
 }
 
 export interface TSetAddFavoriteAction {
   type: "ADD_FAVORITE_HOTELS";
-  payload: { hotels: THotels; amountOfDays: number,currentDate:string };
+  payload: { hotels: THotels; amountOfDays: number; currentDate: string };
 }
 
 export interface TSetDeleteFavoriteAction {
@@ -129,7 +129,7 @@ export interface TSetLoginAction {
   payload: string;
 }
 
-export type  TSinInAction = TSetLoginAction
+export type TSinInAction = TSetLoginAction;
 
 export type THotelAction =
   | TFetchHotelsRequestAction
@@ -143,5 +143,3 @@ export type TFavoriteAction =
   | TSetSortRatingDescAction
   | TSetSortPriceAscAction
   | TSetSortPriceDescAction;
-
-

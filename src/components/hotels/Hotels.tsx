@@ -18,7 +18,6 @@ const Hotels: FC = () => {
   const favorite = useAppSelector(
     (state) => state.favoriteHotelReducer.favorite
   );
-  // console.log(hotels,'hotels')
   return (
     <div className="hotels">
       <div className="hotels-heading">

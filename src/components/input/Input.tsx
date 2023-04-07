@@ -4,7 +4,6 @@ import { IInputProps } from "./Input.types";
 
 import "./Input.scss";
 
-
 const Input: FC<IInputProps> = ({
   htmlFor,
   error,

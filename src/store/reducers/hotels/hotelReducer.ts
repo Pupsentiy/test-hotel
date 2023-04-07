@@ -1,11 +1,11 @@
 import { arrImg } from "../../../core/constants/constants";
 import { currentDate } from "../../../core/helpers/dateFormat.helpers";
+
 import {
-  LOAD_HOTELS_REQUEST,
-  LOAD_HOTELS_SUCCESS,
-  LOAD_HOTELS_FAILURE,
-} from "../../sagas";
-import { TFetchHotelsFailureAction, TFetchHotelsRequestAction, TFetchHotelsSuccessAction, THotelAction, THotelReducerState } from "../../types/store.types";
+  ActionTypesHotels,
+  THotelAction,
+  THotelReducerState,
+} from "../../types/store.types";
 
 const initialState: THotelReducerState = {
   hotels: [],
@@ -19,13 +19,10 @@ const initialState: THotelReducerState = {
 
 export default function hotelReducer(
   state = initialState,
-  action:
-    | TFetchHotelsRequestAction
-    | TFetchHotelsSuccessAction
-    | TFetchHotelsFailureAction
+  action: THotelAction
 ): THotelReducerState {
   switch (action.type) {
-    case LOAD_HOTELS_REQUEST:
+    case ActionTypesHotels.LOAD_HOTELS_REQUEST:
       const { amountOfDays, currentDate } = action.payload;
       return {
         ...state,
@@ -33,7 +30,7 @@ export default function hotelReducer(
         amountOfDays: amountOfDays,
         currentDate: currentDate,
       };
-    case LOAD_HOTELS_SUCCESS:
+    case ActionTypesHotels.LOAD_HOTELS_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -42,7 +39,7 @@ export default function hotelReducer(
         img: arrImg,
       };
 
-    case LOAD_HOTELS_FAILURE:
+    case ActionTypesHotels.LOAD_HOTELS_FAILURE:
       return {
         ...state,
         loading: false,

@@ -1,6 +1,6 @@
 import { THotels } from "../../store/types/store.types";
 
-export const saveToLocalStorage = (state:THotels[] | string,key:string) => {
+export const saveToLocalStorage = (state: THotels[] | string, key: string) => {
   try {
     localStorage.setItem(key, JSON.stringify(state));
   } catch (e) {

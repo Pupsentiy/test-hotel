@@ -12,8 +12,8 @@ import {
   ResponseGenerator,
   THotels,
   TGetHotelsFromApiProps,
+  ActionTypesHotels,
 } from "../../types/store.types";
-import { LOAD_HOTELS_REQUEST } from "../index";
 
 const getHotelsFromApi = async (payload: TGetHotelsFromApiProps) => {
   const { location, currentDate, amountOfDays } = payload;
@@ -36,24 +36,16 @@ export function* fetchHotelList(action: {
   } catch (e) {
     if (axios.isAxiosError(e)) {
       console.log("error message: ", e.message);
-      yield put(
-        fetchHotelsFailureAction(
-           e.message,
-        )
-      );
+      yield put(fetchHotelsFailureAction(e.message));
     } else {
       console.log("unexpected error: ", e);
-      yield put(
-        fetchHotelsFailureAction(
-           "произошла непредвиденная ошибка",
-        )
-      );
+      yield put(fetchHotelsFailureAction("произошла непредвиденная ошибка"));
     }
   }
 }
 
 export default function* watchHotelsSaga() {
   yield all([
-    takeLatest(LOAD_HOTELS_REQUEST, fetchHotelList),
+    takeLatest(ActionTypesHotels.LOAD_HOTELS_REQUEST, fetchHotelList),
   ]);
 }

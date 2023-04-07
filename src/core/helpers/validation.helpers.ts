@@ -8,14 +8,14 @@ export const emeilSchema = yup
   .matches(EMAIL_REGEXP, "Введите адрес электронной почты")
   .required("Пожалуйста, введите электронной почты!");
 
-  export const passwordShema = yup
+export const passwordShema = yup
   .string()
   .matches(PASSWORD_REGEXP, "Должна быть хотя бы одна буква и одна цифра")
   .min(8)
   .max(64)
   .required("Введите пароль");
 
-  export const signIn = yup.object().shape({
-    email: emeilSchema,
-    password: passwordShema,
-  });
+export const signIn = yup.object().shape({
+  email: emeilSchema,
+  password: passwordShema,
+});

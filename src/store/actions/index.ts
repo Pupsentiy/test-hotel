@@ -1,17 +1,21 @@
 import { Dispatch } from "redux";
 import {
-  
   TFavoriteAction,
   THotels,
-  TSetAddFavoriteAction,
-  TSetDeleteFavoriteAction,
   TSetLoginAction,
-  TSetSortPriceAscAction,
-  TSetSortPriceDescAction,
-  TSetSortRatingAscAction,
-  TSetSortRatingDescAction,
 } from "../types/store.types";
-import { ADD_FAVORITE_HOTELS, DELETE_FAVORITE_HOTELS, LOAD_HOTELS_FAILURE, LOAD_HOTELS_REQUEST, LOAD_HOTELS_SUCCESS, LOGIN, SORT_PRICE_ASC, SORT_PRICE_DESC, SORT_RATING_ASC, SORT_RATING_DESC } from "../sagas";
+import {
+  LOAD_HOTELS_REQUEST,
+  LOAD_HOTELS_SUCCESS,
+  LOAD_HOTELS_FAILURE,
+  ADD_FAVORITE_HOTELS,
+  DELETE_FAVORITE_HOTELS,
+  SORT_RATING_ASC,
+  SORT_RATING_DESC,
+  SORT_PRICE_ASC,
+  SORT_PRICE_DESC,
+  LOGIN,
+} from "../constants/actonTypes";
 
 export const fetchHotelsRequestAction = (
   currentDate: string,
@@ -27,17 +31,20 @@ export const fetchHotelsSuccessAction = (payload: THotels[]) => ({
   payload,
 });
 
-export const fetchHotelsFailureAction = (payload: string ) => ({
+export const fetchHotelsFailureAction = (payload: string) => ({
   type: LOAD_HOTELS_FAILURE,
   payload,
 });
 
-
-export const setAddFavoriteAction = (hotels: THotels, amountOfDays: number,currentDate:string) => {
+export const setAddFavoriteAction = (
+  hotels: THotels,
+  amountOfDays: number,
+  currentDate: string
+) => {
   return (dispatch: Dispatch<TFavoriteAction>) => {
     dispatch({
       type: ADD_FAVORITE_HOTELS,
-      payload: { hotels, amountOfDays,currentDate },
+      payload: { hotels, amountOfDays, currentDate },
     });
   };
 };

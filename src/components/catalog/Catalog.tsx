@@ -19,7 +19,7 @@ import { TStarSvgProps } from "../svg/star/StarSvg.types";
 
 const Catalog: FC<TCatalog> = ({ houseImg, data }) => {
   const dispatch = useAppDispatch();
-  const { amountOfDays, currentDate,error } = useAppSelector(
+  const { amountOfDays, currentDate } = useAppSelector(
     (state) => state.hotelReducer
   );
   const favorite = useAppSelector(
@@ -39,8 +39,6 @@ const Catalog: FC<TCatalog> = ({ houseImg, data }) => {
       dispatch(setAddFavoriteAction(item, amountOfDays, currentDate));
     }
   };
-
-  console.log(error)
 
   return (
     <div className="catalog">

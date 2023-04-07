@@ -31,11 +31,12 @@ const SignIn = () => {
   } = useForm<ISignInForm>({ resolver: yupResolver(signIn), mode: "onSubmit" });
 
   const submit: SubmitHandler<ISignInForm> = (data) => {
-    const {email} = data
+    const { email } = data;
     dispath(setLoginAction(email));
     reset();
     navigate(routesConfig.home.path);
   };
+  
   return (
     <div className="signin">
       <div className="signin-filter">

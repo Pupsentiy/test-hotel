@@ -1,15 +1,8 @@
 import { getFromLocalStorage } from "../../../core/helpers/localStorage.helpers";
-import { ADD_FAVORITE_HOTELS, DELETE_FAVORITE_HOTELS, SORT_RATING_ASC, SORT_RATING_DESC, SORT_PRICE_ASC, SORT_PRICE_DESC } from "../../sagas";
 import {
-  
+  ActionTypesFavorite,
   TFavoriteAction,
   TFavoriteReducerState,
-  TSetAddFavoriteAction,
-  TSetDeleteFavoriteAction,
-  TSetSortPriceAscAction,
-  TSetSortPriceDescAction,
-  TSetSortRatingAscAction,
-  TSetSortRatingDescAction,
 } from "../../types/store.types";
 
 const initialState: TFavoriteReducerState = {
@@ -20,17 +13,12 @@ const initialState: TFavoriteReducerState = {
 
 export default function favoriteHotelReducer(
   state = initialState,
-  action:| TSetAddFavoriteAction
-  | TSetDeleteFavoriteAction
-  | TSetSortRatingAscAction
-  | TSetSortRatingDescAction
-  | TSetSortPriceAscAction
-  | TSetSortPriceDescAction
+  action: TFavoriteAction
 ): TFavoriteReducerState {
   switch (action.type) {
-    case ADD_FAVORITE_HOTELS:
+    case ActionTypesFavorite.ADD_FAVORITE_HOTELS:
       action.payload.hotels["days"] = action.payload.amountOfDays;
-      action.payload.hotels['currentDate'] = action.payload.currentDate
+      action.payload.hotels["currentDate"] = action.payload.currentDate;
       return {
         ...state,
         favorite: state.favorite.some(
@@ -40,7 +28,7 @@ export default function favoriteHotelReducer(
           : [...state.favorite, action.payload.hotels],
       };
 
-    case DELETE_FAVORITE_HOTELS:
+    case ActionTypesFavorite.DELETE_FAVORITE_HOTELS:
       return {
         ...state,
         favorite: state.favorite.filter(
@@ -48,7 +36,7 @@ export default function favoriteHotelReducer(
         ),
       };
 
-    case SORT_RATING_ASC:
+    case ActionTypesFavorite.SORT_RATING_ASC:
       const stateCopyRatingAsc = state.favorite.map((hotels) => hotels);
       stateCopyRatingAsc.sort((a: { stars: number }, b: { stars: number }) =>
         b.stars < a.stars ? 1 : -1
@@ -57,7 +45,7 @@ export default function favoriteHotelReducer(
         ...state,
         favorite: stateCopyRatingAsc,
       };
-    case SORT_RATING_DESC:
+    case ActionTypesFavorite.SORT_RATING_DESC:
       const stateCopyRatingDesc = state.favorite.map((hotels) => hotels);
       stateCopyRatingDesc.sort((a: { stars: number }, b: { stars: number }) =>
         b.stars > a.stars ? 1 : -1
@@ -67,7 +55,7 @@ export default function favoriteHotelReducer(
         favorite: stateCopyRatingDesc,
       };
 
-    case SORT_PRICE_ASC:
+    case ActionTypesFavorite.SORT_PRICE_ASC:
       const stateCopyPriceAsc = state.favorite.map((hotels) => hotels);
       stateCopyPriceAsc.sort(
         (a: { priceFrom: number }, b: { priceFrom: number }) =>
@@ -77,7 +65,7 @@ export default function favoriteHotelReducer(
         ...state,
         favorite: stateCopyPriceAsc,
       };
-    case SORT_PRICE_DESC:
+    case ActionTypesFavorite.SORT_PRICE_DESC:
       const stateCopyPriceDesc = state.favorite.map((hotels) => hotels);
       stateCopyPriceDesc.sort(
         (a: { priceFrom: number }, b: { priceFrom: number }) =>

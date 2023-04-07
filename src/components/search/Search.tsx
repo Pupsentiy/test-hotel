@@ -1,4 +1,10 @@
-import { ChangeEvent, FC, FormEvent, useState } from "react";
+import {
+  ChangeEvent,
+  FC,
+  FormEvent,
+  useDeferredValue,
+  useState,
+} from "react";
 
 import Button from "../button/Button";
 import Input from "../input/Input";
@@ -11,9 +17,11 @@ import "./Search.scss";
 
 const Search: FC = () => {
   const dispath = useAppDispatch();
+
   const [location, setLocation] = useState<string>("Москва");
   const [amountOfDays, setAmountOfDays] = useState<string>("1");
   const [date, setDate] = useState<string>(currentDate);
+  const locationDebounce = useDeferredValue(location);
 
   const getLocation = (event: ChangeEvent<HTMLInputElement>) => {
     setLocation(event.target.value);
@@ -31,17 +39,17 @@ const Search: FC = () => {
     e.preventDefault();
     dispath(fetchHotelsRequestAction(date, location, Number(amountOfDays)));
   };
-//добавить debonce
+
   return (
     <div className="home-search-container">
-      <form onSubmit={(e:FormEvent<HTMLFormElement>) => submit(e)}>
+      <form onSubmit={(e: FormEvent<HTMLFormElement>) => submit(e)}>
         <Input
           htmlFor="Локация"
           type="text"
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
             getLocation(event)
           }
-          value={location}
+          value={locationDebounce}
           classInput="home__location-input"
           classLabel="home__input-label"
         />
