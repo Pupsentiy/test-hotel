@@ -19,7 +19,7 @@ const getHotelsFromApi = async (payload: TGetHotelsFromApiProps) => {
   const { location, currentDate, amountOfDays } = payload;
   const sumDays = getSumDays(currentDate, amountOfDays);
   return await axios.get<THotels[]>(
-    `http://engine.hotellook.com/api/v2/cache.json?location=${location}&currency=rub&language=ru&checkIn=${currentDate}&checkOut=${sumDays}&limit=20`
+    `https://engine.hotellook.com/api/v2/cache.json?location=${location}&currency=rub&language=ru&checkIn=${currentDate}&checkOut=${sumDays}&limit=20`
   );
 };
 
