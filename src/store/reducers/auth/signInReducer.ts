@@ -1,24 +1,21 @@
 import { getFromLocalStorage } from "../../../core/helpers/localStorage.helpers";
+import { LOGIN } from "../../sagas";
+import { TSetLoginAction, TSignInReducerState, TSinInAction } from "../../types/store.types";
 
-export const LOGIN = "LOGIN";
 
-export const loginAction = (payload: any) => ({
-  type: LOGIN,
-  payload,
-});
-
-const initialState: any = {
+const initialState:TSignInReducerState  = {
   auth: getFromLocalStorage("auth")
     ? JSON.parse(getFromLocalStorage("auth") || "{}")
     : {},
 };
 
-export default function signInReducer(state = initialState, action: any) {
+export default function signInReducer(state = initialState, action:TSetLoginAction):TSignInReducerState {
   switch (action.type) {
     case LOGIN:
+      console.log(action.payload)
       return {
         ...state,
-        auth: { login: action.payload},
+        auth: action.payload
       };
     default:
       return state;

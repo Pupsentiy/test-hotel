@@ -1,38 +1,59 @@
 import { all, call, put, takeLatest } from "redux-saga/effects";
-import {
-  LOAD_HOTELS_REQUEST,
-  fetchHotelsFailureAction,
-  fetchHotelsSuccessAction,
-} from "../../reducers/hotels/hotelReducer";
 import axios from "axios";
+
 import { getSumDays } from "../../../core/helpers/dateFormat.helpers";
 
-const getHotelsFromApi = async (payload: any) => {
-  const { location, currentDate, amountOfDays } = payload;
+import {
+  fetchHotelsFailureAction,
+  fetchHotelsSuccessAction,
+} from "../../actions";
 
-  const sumDays = getSumDays(currentDate, amountOfDays)
-  return await axios.get<any>(
+import {
+  ResponseGenerator,
+  THotels,
+  TGetHotelsFromApiProps,
+} from "../../types/store.types";
+import { LOAD_HOTELS_REQUEST } from "../index";
+
+const getHotelsFromApi = async (payload: TGetHotelsFromApiProps) => {
+  const { location, currentDate, amountOfDays } = payload;
+  const sumDays = getSumDays(currentDate, amountOfDays);
+  return await axios.get<THotels[]>(
     `http://engine.hotellook.com/api/v2/cache.json?location=${location}&currency=rub&language=ru&checkIn=${currentDate}&checkOut=${sumDays}&limit=20`
   );
 };
 
-export function* fetchHotelList({ payload }: any): any {
+export function* fetchHotelList(action: {
+  type: string;
+  payload: TGetHotelsFromApiProps;
+}) {
   try {
-    const responce = yield call(getHotelsFromApi, payload);
-    yield put(
-      fetchHotelsSuccessAction({
-        data: responce.data,
-      })
+    const responce: ResponseGenerator = yield call(
+      getHotelsFromApi,
+      action.payload
     );
-  } catch (e: any) {
-    yield put(
-      fetchHotelsFailureAction({
-        error: e.message,
-      })
-    );
+    yield put(fetchHotelsSuccessAction(responce.data));
+  } catch (e) {
+    if (axios.isAxiosError(e)) {
+      console.log("error message: ", e.message);
+      yield put(
+        fetchHotelsFailureAction(
+           e.message,
+        )
+      );
+    } else {
+      console.log("unexpected error: ", e);
+      yield put(
+        fetchHotelsFailureAction(
+           "произошла непредвиденная ошибка",
+        )
+      );
+    }
   }
 }
 
 export default function* watchHotelsSaga() {
-  yield all([takeLatest(LOAD_HOTELS_REQUEST, fetchHotelList)]);
+  yield all([
+    takeLatest(LOAD_HOTELS_REQUEST, fetchHotelList),
+  ]);
 }

@@ -4,12 +4,13 @@ import { useNavigate } from "react-router-dom";
 import Button from "../button/Button";
 
 import log from "../../assets/img/logout.svg";
+import { routesConfig } from "../../routes/routesConfig";
 
 import "./Header.scss";
-import { routesConfig } from "../../routes/routesConfig";
 
 const Header: FC = () => {
   const navigate = useNavigate();
+
   const logout = () => {
     navigate(routesConfig.login.path);
     localStorage.clear();

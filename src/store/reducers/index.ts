@@ -5,7 +5,7 @@ import favoriteHotelReducer from "./favoriteHotelsReducer/favoriteHotelsReducer"
 import signInReducer from "./auth/signInReducer";
 
 export const rootReducer = combineReducers({
-    hotelReducer,
+    hotelReducer, 
     favoriteHotelReducer,
     signInReducer
 });

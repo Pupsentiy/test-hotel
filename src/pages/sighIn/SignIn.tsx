@@ -5,14 +5,14 @@ import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
 import ModalWindow from "../../components/modalWindow/ModalWindow";
 
-import { useAppDispatch } from "../../hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
 import { signIn } from "../../core/helpers/validation.helpers";
 
 import "./SignIn.scss";
-import { loginAction } from "../../store/reducers/auth/signInReducer";
 import { useNavigate } from "react-router-dom";
 import { routesConfig } from "../../routes/routesConfig";
+import { setLoginAction } from "../../store/actions";
 
 export interface ISignInForm {
   email: string;
@@ -22,6 +22,7 @@ export interface ISignInForm {
 const SignIn = () => {
   const dispath = useAppDispatch();
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -30,7 +31,8 @@ const SignIn = () => {
   } = useForm<ISignInForm>({ resolver: yupResolver(signIn), mode: "onSubmit" });
 
   const submit: SubmitHandler<ISignInForm> = (data) => {
-    dispath(loginAction(data.email));
+    const {email} = data
+    dispath(setLoginAction(email));
     reset();
     navigate(routesConfig.home.path);
   };

@@ -9,10 +9,12 @@ import { composeEnhancers } from "../core/constants/constants";
 import rootSaga from "./sagas";
 import { rootReducer } from "./reducers";
 import { saveToLocalStorage } from "../core/helpers/localStorage.helpers";
+import thunk from "redux-thunk";
 
 const sagaMiddleware = createSagaMiddleware()
+const middleWares = [sagaMiddleware, thunk]
 
-const store = createStore(rootReducer,composeEnhancers(applyMiddleware(sagaMiddleware)))
+const store = createStore(rootReducer,composeEnhancers(applyMiddleware(...middleWares)))
 
 sagaMiddleware.run(rootSaga)
 

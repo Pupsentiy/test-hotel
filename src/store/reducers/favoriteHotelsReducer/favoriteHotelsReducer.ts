@@ -1,67 +1,55 @@
 import { getFromLocalStorage } from "../../../core/helpers/localStorage.helpers";
+import { ADD_FAVORITE_HOTELS, DELETE_FAVORITE_HOTELS, SORT_RATING_ASC, SORT_RATING_DESC, SORT_PRICE_ASC, SORT_PRICE_DESC } from "../../sagas";
+import {
+  
+  TFavoriteAction,
+  TFavoriteReducerState,
+  TSetAddFavoriteAction,
+  TSetDeleteFavoriteAction,
+  TSetSortPriceAscAction,
+  TSetSortPriceDescAction,
+  TSetSortRatingAscAction,
+  TSetSortRatingDescAction,
+} from "../../types/store.types";
 
-export const ADD_FAVORITE_HOTELS = "ADD_FAVORITE_HOTELS";
-export const DELETE_FAVORITE_HOTELS = "DELETE_FAVORITE_HOTELS";
-export const SORT_RATING_ASC = "SORT_RATING_ASC";
-export const SORT_RATING_DESC = "SORT_RATING_DESC";
-export const SORT_PRICE_ASC = "SORT_PRICE_ASC";
-export const SORT_PRICE_DESC = "SORT_PRICE_DESC";
-
-const initialState: any = {
+const initialState: TFavoriteReducerState = {
   favorite: getFromLocalStorage("favorite")
     ? JSON.parse(getFromLocalStorage("favorite") || "{}")
     : [],
 };
 
-export const setAddFavoriteAction = (data: any, amountOfDays: string) => ({
-  type: ADD_FAVORITE_HOTELS,
-  payload: { data, amountOfDays },
-});
-export const setDeleteFavoriteAction = (payload: { error: any }) => ({
-  type: DELETE_FAVORITE_HOTELS,
-  payload,
-});
-
-export const setSortRatingAscAction = () => ({
-  type: SORT_RATING_ASC,
-});
-
-export const setSortRatingDescAction = () => ({
-  type: SORT_RATING_DESC,
-});
-export const setSortPriceAscAction = () => ({
-  type: SORT_PRICE_ASC,
-});
-export const setSortPriceDescAction = () => ({
-  type: SORT_PRICE_DESC,
-});
-
 export default function favoriteHotelReducer(
   state = initialState,
-  action: any
-) {
+  action:| TSetAddFavoriteAction
+  | TSetDeleteFavoriteAction
+  | TSetSortRatingAscAction
+  | TSetSortRatingDescAction
+  | TSetSortPriceAscAction
+  | TSetSortPriceDescAction
+): TFavoriteReducerState {
   switch (action.type) {
     case ADD_FAVORITE_HOTELS:
-      action.payload.data["days"] = action.payload.amountOfDays;
+      action.payload.hotels["days"] = action.payload.amountOfDays;
+      action.payload.hotels['currentDate'] = action.payload.currentDate
       return {
         ...state,
         favorite: state.favorite.some(
-          (hotel: any) => hotel.hotelId === action.payload.hotelId
+          (hotel) => hotel.hotelId === action.payload.hotels.hotelId
         )
           ? state.favorite
-          : [...state.favorite, action.payload.data],
+          : [...state.favorite, action.payload.hotels],
       };
 
     case DELETE_FAVORITE_HOTELS:
       return {
         ...state,
         favorite: state.favorite.filter(
-          (hotels: any) => hotels.hotelId !== action.payload.hotelId
+          (hotels) => hotels.hotelId !== action.payload.hotelId
         ),
       };
 
     case SORT_RATING_ASC:
-      const stateCopyRatingAsc = state.favorite.map((e: any) => e);
+      const stateCopyRatingAsc = state.favorite.map((hotels) => hotels);
       stateCopyRatingAsc.sort((a: { stars: number }, b: { stars: number }) =>
         b.stars < a.stars ? 1 : -1
       );
@@ -70,7 +58,7 @@ export default function favoriteHotelReducer(
         favorite: stateCopyRatingAsc,
       };
     case SORT_RATING_DESC:
-      const stateCopyRatingDesc = state.favorite.map((e: any) => e);
+      const stateCopyRatingDesc = state.favorite.map((hotels) => hotels);
       stateCopyRatingDesc.sort((a: { stars: number }, b: { stars: number }) =>
         b.stars > a.stars ? 1 : -1
       );
@@ -80,7 +68,7 @@ export default function favoriteHotelReducer(
       };
 
     case SORT_PRICE_ASC:
-      const stateCopyPriceAsc = state.favorite.map((e: any) => e);
+      const stateCopyPriceAsc = state.favorite.map((hotels) => hotels);
       stateCopyPriceAsc.sort(
         (a: { priceFrom: number }, b: { priceFrom: number }) =>
           b.priceFrom < a.priceFrom ? 1 : -1
@@ -90,7 +78,7 @@ export default function favoriteHotelReducer(
         favorite: stateCopyPriceAsc,
       };
     case SORT_PRICE_DESC:
-      const stateCopyPriceDesc = state.favorite.map((e: any) => e);
+      const stateCopyPriceDesc = state.favorite.map((hotels) => hotels);
       stateCopyPriceDesc.sort(
         (a: { priceFrom: number }, b: { priceFrom: number }) =>
           b.priceFrom > a.priceFrom ? 1 : -1

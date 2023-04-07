@@ -2,17 +2,19 @@ import { ChangeEvent, FC } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
+import {
+  setSortRatingDescAction,
+  setSortRatingAscAction,
+  setSortPriceDescAction,
+  setSortPriceAscAction,
+} from "../../store/actions";
+
+import { dataPrice, dataRating } from "../../core/constants/constants";
+
 import Catalog from "../catalog/Catalog";
+import Select from "../select/Select";
 
 import "./Favorite.scss";
-import {
-  setSortPriceAscAction,
-  setSortPriceDescAction,
-  setSortRatingAscAction,
-  setSortRatingDescAction,
-} from "../../store/reducers/favoriteHotelsReducer/favoriteHotelsReducer";
-import Select from "../select/Select";
-import { dataPrice, dataRating } from "../../core/constants/constants";
 
 const Favorite: FC = () => {
   const dispatch = useAppDispatch();
@@ -20,7 +22,7 @@ const Favorite: FC = () => {
     (state) => state.favoriteHotelReducer.favorite
   );
 
-  const changePickRating = (event: any) => {
+  const changePickRating = (event: ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
     if (value === "DESC") {
       dispatch(setSortRatingDescAction());
@@ -46,14 +48,14 @@ const Favorite: FC = () => {
         <Select
           name="rating"
           id="rating"
-          onChange={(event: any) => changePickRating(event)}
+          onChange={(event: ChangeEvent<HTMLSelectElement>) => changePickRating(event)}
           className="favorite-select"
           data={dataRating}
         />
         <Select
           name="price"
           id="price"
-          onChange={(event: any) => changePickPrice(event)}
+          onChange={(event: ChangeEvent<HTMLSelectElement>) => changePickPrice(event)}
           className="favorite-select"
           data={dataPrice}
         />

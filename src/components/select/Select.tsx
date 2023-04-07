@@ -1,14 +1,10 @@
 import { ChangeEvent, FC } from "react";
+import { TDataPrice, TDataRating } from "../../core/constants/constants.types";
+import { TSelectProps } from "./Select.types";
 
-export type TSelectProps = {
-  name:string
-  id:string
-  onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
-  className:string
-  data:any
-};
 
-const Select: FC<TSelectProps> = ({name,id,onChange,className,data}) => {
+
+const Select: FC<TSelectProps> = ({ name, id, onChange, className, data }) => {
   return (
     <select
       name={name}
@@ -16,9 +12,12 @@ const Select: FC<TSelectProps> = ({name,id,onChange,className,data}) => {
       onChange={(event: ChangeEvent<HTMLSelectElement>) => onChange(event)}
       className={className}
     >
-      {data && data.map((item:any,i:number) =>
-      <option value={item.value} key={i}>{item.name}</option>
-      )}
+      {data &&
+        data.map((item: TDataPrice | TDataRating, i: number) => (
+          <option value={item.value} key={i}>
+            {item.name}
+          </option>
+        ))}
     </select>
   );
 };

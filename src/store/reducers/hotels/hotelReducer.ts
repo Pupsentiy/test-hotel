@@ -1,30 +1,14 @@
 import { arrImg } from "../../../core/constants/constants";
 import { currentDate } from "../../../core/helpers/dateFormat.helpers";
+import {
+  LOAD_HOTELS_REQUEST,
+  LOAD_HOTELS_SUCCESS,
+  LOAD_HOTELS_FAILURE,
+} from "../../sagas";
+import { TFetchHotelsFailureAction, TFetchHotelsRequestAction, TFetchHotelsSuccessAction, THotelAction, THotelReducerState } from "../../types/store.types";
 
-export const LOAD_HOTELS_REQUEST = "LOAD_HOTELS_REQUEST";
-export const LOAD_HOTELS_SUCCESS = "SET_HOTELS_SUCCESS";
-export const LOAD_HOTELS_FAILURE = "SET_HOTELS_FAILURE";
-
-export const fetchHotelsRequestAction = (
-  currentDate: any,
-  location: any,
-  amountOfDays: any
-) => ({
-  type: LOAD_HOTELS_REQUEST,
-  payload: { currentDate, location, amountOfDays },
-});
-
-export const fetchHotelsSuccessAction = (payload: { data: any }) => ({
-  type: LOAD_HOTELS_SUCCESS,
-  payload,
-});
-export const fetchHotelsFailureAction = (payload: { error: any }) => ({
-  type: LOAD_HOTELS_FAILURE,
-  payload,
-});
-
-const initialState: any = {
-  data: [],
+const initialState: THotelReducerState = {
+  hotels: [],
   error: null,
   loading: false,
   currentDate,
@@ -33,7 +17,13 @@ const initialState: any = {
   img: [],
 };
 
-export default function hotelReducer(state = initialState, action: any) {
+export default function hotelReducer(
+  state = initialState,
+  action:
+    | TFetchHotelsRequestAction
+    | TFetchHotelsSuccessAction
+    | TFetchHotelsFailureAction
+): THotelReducerState {
   switch (action.type) {
     case LOAD_HOTELS_REQUEST:
       const { amountOfDays, currentDate } = action.payload;
@@ -47,7 +37,7 @@ export default function hotelReducer(state = initialState, action: any) {
       return {
         ...state,
         loading: false,
-        data: action.payload,
+        hotels: action.payload,
         error: null,
         img: arrImg,
       };
@@ -56,7 +46,7 @@ export default function hotelReducer(state = initialState, action: any) {
       return {
         ...state,
         loading: false,
-        data: [],
+        hotels: [],
         error: action.payload,
         img: [],
       };

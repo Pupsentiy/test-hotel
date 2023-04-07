@@ -1,17 +1,11 @@
-import { FC, ReactNode } from "react";
+import { FC } from "react";
 
-import './ModalWindow.scss'
+import { TModalWindowProps } from "./ModalWindow.types";
 
-export type TModalWindowProps = {
-  children:ReactNode
-}
+import "./ModalWindow.scss";
 
-const ModalWindow:FC<TModalWindowProps> = ({children}) => {
-  return (
-    <div className="modalwindow-container">
-      {children}
-    </div>
-  );
+const ModalWindow: FC<TModalWindowProps> = ({ children }) => {
+  return <div className="modalwindow-container">{children}</div>;
 };
 
 export default ModalWindow;

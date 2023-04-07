@@ -1,12 +1,13 @@
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, FC, FormEvent, useState } from "react";
 
 import Button from "../button/Button";
 import Input from "../input/Input";
 
-import "./Search.scss";
 import { useAppDispatch } from "../../hooks/hooks";
-import { fetchHotelsRequestAction } from "../../store/reducers/hotels/hotelReducer";
 import { currentDate } from "../../core/helpers/dateFormat.helpers";
+import { fetchHotelsRequestAction } from "../../store/actions";
+
+import "./Search.scss";
 
 const Search: FC = () => {
   const dispath = useAppDispatch();
@@ -26,14 +27,14 @@ const Search: FC = () => {
     setAmountOfDays(event.target.value);
   };
 
-  const submit = (e: any) => {
+  const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispath(fetchHotelsRequestAction(date, location, amountOfDays));
+    dispath(fetchHotelsRequestAction(date, location, Number(amountOfDays)));
   };
 //добавить debonce
   return (
     <div className="home-search-container">
-      <form onSubmit={(e) => submit(e)}>
+      <form onSubmit={(e:FormEvent<HTMLFormElement>) => submit(e)}>
         <Input
           htmlFor="Локация"
           type="text"

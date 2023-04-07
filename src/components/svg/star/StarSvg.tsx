@@ -1,8 +1,5 @@
 import { FC } from "react";
-
-export type TStarSvgProps = {
-  color?: string;
-};
+import { TStarSvgProps } from "./StarSvg.types";
 
 const StarSvg: FC<TStarSvgProps> = ({ color }) => {
   return (

@@ -12,13 +12,13 @@ import house from "../../assets/img/house.svg";
 import "./Hotels.scss";
 
 const Hotels: FC = () => {
-  const {error, data, location, currentDate } = useAppSelector(
+  const { hotels, location, currentDate } = useAppSelector(
     (state) => state.hotelReducer
   );
   const favorite = useAppSelector(
     (state) => state.favoriteHotelReducer.favorite
   );
-console.log(error)
+  // console.log(hotels,'hotels')
   return (
     <div className="hotels">
       <div className="hotels-heading">
@@ -40,7 +40,7 @@ console.log(error)
         отеля
       </h2>
       <div className="hotels-list__content">
-        <Catalog houseImg={house} data={data.data} />
+        <Catalog houseImg={house} data={hotels} />
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import { FC } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { useAppSelector } from "../../hooks/hooks";
+import { TArrImg } from "../../core/constants/constants.types";
 
 import "./SwiperComponent.scss";
 
@@ -17,7 +18,7 @@ const SwiperComponent: FC = () => {
       speed={700}
     >
       {img &&
-        img.map((item: any, idx: number) => (
+        img.map((item: TArrImg, idx: number) => (
           <SwiperSlide key={idx} className="swiper-slide">
             <div
               className={

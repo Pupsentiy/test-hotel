@@ -2,48 +2,50 @@ import { FC } from "react";
 import { stars } from "../../core/constants/constants";
 import { changeFormatDate } from "../../core/helpers/dateFormat.helpers";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import {
-  setDeleteFavoriteAction,
-  setAddFavoriteAction,
-} from "../../store/reducers/favoriteHotelsReducer/favoriteHotelsReducer";
+
 import Button from "../button/Button";
-import StarSvg from "../svg/star/StarSvg";
 import likeTransparent from "../../assets/img/likeGrey.svg";
 import like from "../../assets/img/likeRed.svg";
 
-import "./Catalog.scss";
+import { THotels } from "../../store/types/store.types";
+import { TCatalog } from "./Catalog.types";
+import {
+  setAddFavoriteAction,
+  setDeleteFavoriteAction,
+} from "../../store/actions";
 
-export type TCatalog = {
-  houseImg?: string;
-  data: any;
-};
+import "./Catalog.scss";
+import { TStarSvgProps } from "../svg/star/StarSvg.types";
 
 const Catalog: FC<TCatalog> = ({ houseImg, data }) => {
   const dispatch = useAppDispatch();
-  const { amountOfDays, currentDate } = useAppSelector(
+  const { amountOfDays, currentDate,error } = useAppSelector(
     (state) => state.hotelReducer
   );
   const favorite = useAppSelector(
     (state) => state.favoriteHotelReducer.favorite
   );
-
-  const getBoolean = (item: any) => {
-    return favorite.some((hotel: any) => hotel.hotelId === item.hotelId);
+  const getBoolean = (item: THotels) => {
+    return favorite.some((hotel: THotels) => hotel.hotelId === item.hotelId);
   };
 
-  const handleFavoriteHotel = (item: any) => {
-    const bool = favorite.some((hotel: any) => hotel.hotelId === item.hotelId);
+  const handleFavoriteHotel = (item: THotels) => {
+    const bool = favorite.some(
+      (hotel: THotels) => hotel.hotelId === item.hotelId
+    );
     if (bool) {
       dispatch(setDeleteFavoriteAction(item));
     } else {
-      dispatch(setAddFavoriteAction(item, amountOfDays));
+      dispatch(setAddFavoriteAction(item, amountOfDays, currentDate));
     }
   };
+
+  console.log(error)
 
   return (
     <div className="catalog">
       {data &&
-        data.map((item: any, i: any) => (
+        data?.map((item: THotels, i: number) => (
           <div className="wrapper-catalog" key={i}>
             <div className={"catalog__item"}>
               {houseImg !== undefined ? (
@@ -68,14 +70,17 @@ const Catalog: FC<TCatalog> = ({ houseImg, data }) => {
 
                 <div className="info-middle">
                   <h4 className="item-date">
-                    {changeFormatDate(currentDate)} <span>-</span>{" "}
+                    {item?.currentDate !== undefined
+                      ? changeFormatDate(item.currentDate)
+                      : changeFormatDate(currentDate)}{" "}
+                    <span>-</span>
                     {item.days !== undefined ? item.days : amountOfDays}
                     {" день"}
                   </h4>
                 </div>
                 <div className="info-footer">
                   <div className="item-rating">
-                    {stars.map((_el, i) => (
+                    {stars.map((StarSvg: FC<TStarSvgProps>, i: number) => (
                       <div key={i + 1}>
                         <StarSvg
                           color={i < item.stars ? "#CDBC1E" : "#6C6845"}

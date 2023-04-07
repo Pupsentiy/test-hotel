@@ -5,7 +5,7 @@ export const currentDate: string = new Date()
   .reverse()
   .join("-");
 
-export const getSumDays = (currentDate: Date, amountOfDays: number):string => {
+export const getSumDays = (currentDate: string, amountOfDays: number):string => {
   return new Date(
     new Date(currentDate).setDate(
       new Date(currentDate).getDate() + Number(amountOfDays)
@@ -18,7 +18,7 @@ export const getSumDays = (currentDate: Date, amountOfDays: number):string => {
     .join("-");
 };
 
-export const changeFormatDate = (currentDate: string | number | Date) => {
+export const changeFormatDate = (currentDate: string):string => {
   return new Date(currentDate)
     .toLocaleString("ru", {
       year: "numeric",
