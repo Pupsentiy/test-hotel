@@ -5,7 +5,7 @@ import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
 import ModalWindow from "../../components/modalWindow/ModalWindow";
 
-import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { useAppDispatch } from "../../hooks/hooks";
 
 import { signIn } from "../../core/helpers/validation.helpers";
 
@@ -36,7 +36,7 @@ const SignIn = () => {
     reset();
     navigate(routesConfig.home.path);
   };
-  
+
   return (
     <div className="signin">
       <div className="signin-filter">
