@@ -10,7 +10,7 @@ export const emeilSchema = yup
 
 export const passwordShema = yup
   .string()
-  .matches(PASSWORD_REGEXP, "Должен содержать 8 символов, одну цифру, только латинские буквы")
+  .matches(PASSWORD_REGEXP, "Пароль должен содержать 8 символов, одну цифру, только латинские буквы")
   .min(8)
   .max(64)
   .required("Введите пароль");
